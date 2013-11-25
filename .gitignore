@@ -11,3 +11,8 @@
 *.lai
 *.la
 *.a
+
+Debug/
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
