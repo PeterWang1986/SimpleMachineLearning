@@ -6,6 +6,8 @@
 #include "tbb\task_group.h"
 #include "tbb\task_scheduler_init.h"
 
+#include <numeric>
+
 namespace SML {
 	using std::vector;
 
@@ -68,6 +70,18 @@ namespace SML {
 			taskGroup.run(taskForDesignMatrx);
 		}
 		taskGroup.wait();
+	}
+
+	double LinearRegressionModel::forecast(const double* data, size_t dimension) const
+	{
+		const size_t NumWeights = this->getNumBasisFunctions();
+		vector<double> phiVectors(NumWeights, 0);
+		for (size_t i=0; i!=NumWeights; ++i)
+		{
+			phiVectors[i] = (this->getBasisFunction(i))->phi(data, dimension);
+		}
+
+		return std::inner_product(phiVectors.begin(), phiVectors.end(), m_Weights.begin(), 0.0);
 	}
 
 	namespace sml_impl {

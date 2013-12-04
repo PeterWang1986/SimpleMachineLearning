@@ -5,7 +5,11 @@
 #include "eigen\Core"
 #include "eigen\SVD"
 
+#include <numeric>
+
 namespace SML {
+
+	using std::vector;
 
 	using Eigen::MatrixXd;
 	using Eigen::VectorXd;
@@ -46,6 +50,45 @@ namespace SML {
 		}
 	}
 
+	double LinearRegressionBuilder::dissimilarity(const vector<double>& v1,
+												const vector<double>& v2) const
+	{
+		const size_t num = v1.size();
+		double sum = 0.0;
+		for (size_t i=0; i!=num; ++i)
+		{
+			const double diff = v1[i] - v2[i];
+			sum += diff * diff;
+		}
+
+		return std::sqrt(sum);
+	}
+
+	void LinearRegressionBuilder::sequence_training(size_t dimension,
+													const double* data,
+													const double target,
+													double alpha)
+	{
+		const size_t num = m_model.getNumBasisFunctions();
+		vector<double> phiVector(num, 0.0);
+		for (size_t i=0; i!=num; ++i)
+		{
+			const BasisFunctionBase* pFun = m_model.getBasisFunction(i);
+			phiVector[i] = pFun->phi(data, dimension);
+		}
+
+		const vector<double>& weights = m_model.getWeights();
+		double diff = std::inner_product(weights.begin(), weights.end(), phiVector.begin(), 0.0);
+		diff -= target;
+		diff *= alpha;
+
+		for (size_t i=0; i!=num; ++i)
+		{
+			const double w = weights[i] - (diff * phiVector[i]);
+			m_model.setWeights(i, w);
+		}
+	}
+
 	void LinearRegressionBuilder::useDefaultBasisFunctions(size_t dimension)
 	{
 		m_model.addBasisFunction(new BiasFunction(1.0));
@@ -53,6 +96,37 @@ namespace SML {
 		{
 			m_model.addBasisFunction(new LinearBasisFunction(i));
 		}
+	}
+
+	void LinearRegressionBuilder::addBiasFunction()
+	{
+		addBasisFunction(new BiasFunction(1.0));
+	}
+	
+	void LinearRegressionBuilder::addLinearBasisFunction(size_t pos)
+	{
+		addBasisFunction(new LinearBasisFunction(pos));
+	}
+
+	void LinearRegressionBuilder::addSigmodBasisFunction(size_t pos,
+														double mean,
+														double variance)
+	{
+		addBasisFunction(new SigmodBasisFunction(pos, mean, variance));
+	}
+		
+	void LinearRegressionBuilder::addSingleVarGussian(size_t pos,
+													double mean,
+													double variance)
+	{
+		addBasisFunction(new SingleVarGussian(pos, mean, variance));
+	}
+		
+	void LinearRegressionBuilder::addGussianBasisFunction(size_t dimension,
+														const double* mean,
+														const double* covariance)
+	{
+		addBasisFunction(new GussianBasisFunction(dimension, mean, covariance));
 	}
 
 

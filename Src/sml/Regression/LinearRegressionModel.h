@@ -27,11 +27,13 @@ namespace SML {
 		bool setWeights(size_t pos, double weight);
 		void calcDesignMatrix(size_t rows, size_t cols,
 							size_t dimesion, const double* data, double* matrix);
+		double forecast(const double* data, size_t dimension) const;
 
 		inline size_t getNumBasisFunctions() const { return m_BasisFunctions.size(); }
 		inline BasisFunctionBase* getBasisFunction(size_t pos);
 		inline const BasisFunctionBase* getBasisFunction(size_t pos) const;
 		inline double getWeights(size_t pos) const { return m_Weights[pos]; }
+		inline const std::vector<double>& getWeights() const { return m_Weights; }
 
 	private:
 		std::vector<double>					m_Weights;
