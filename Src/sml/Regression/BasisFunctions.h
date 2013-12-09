@@ -1,12 +1,11 @@
 #ifndef	_BASIS_FUNCTIONS_H
 #define _BASIS_FUNCTIONS_H
 
-#include <iterator>
+#include "sml\Common\SmlMacro.h"
+
 #include "eigen\Core"
 
 namespace SML {
-
-	#define ITER_VALUE_TYPE(itr) typename std::iterator_traits<itr>::value_type
 
 	class BasisFunctionBase
 	{

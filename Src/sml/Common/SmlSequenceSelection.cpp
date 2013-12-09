@@ -1,6 +1,9 @@
 
 #include "sml\Common\SmlSequenceSelection.h"
 
+#include <iostream>
+#include <ctime>
+
 namespace SML {
 
 	ForwardSelection::ForwardSelection(size_t window,
@@ -34,6 +37,26 @@ namespace SML {
 			m_beg = m_iBegin;
 			m_end = m_beg + m_iWindow;
 		}
+	}
+
+
+	RandomSelection::RandomSelection(size_t window,
+									size_t beg,
+									size_t end)
+									: m_count(0)
+									, m_iWindow(window)
+									, m_iRange(end - beg)
+									, m_iBegin(beg)
+	{
+		std::srand(static_cast<unsigned int>(std::time(0)));
+	}
+
+	size_t RandomSelection::getNext()
+	{
+		++m_count;
+		const size_t n = (std::rand() % m_iRange) + m_iBegin;
+
+		return n;
 	}
 
 
