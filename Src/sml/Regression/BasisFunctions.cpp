@@ -1,6 +1,6 @@
 
-#include "sml\Regression\BasisFunctions.h"
-#include "eigen\LU"
+#include "sml/Regression/BasisFunctions.h"
+#include "eigen/LU"
 #include <cmath>
 
 namespace SML {

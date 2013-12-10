@@ -1,9 +1,9 @@
 #ifndef	_BASIS_FUNCTIONS_H
 #define _BASIS_FUNCTIONS_H
 
-#include "sml\Common\SmlMacro.h"
+#include "sml/Common/SmlMacro.h"
 
-#include "eigen\Core"
+#include "eigen/Core"
 
 namespace SML {
 

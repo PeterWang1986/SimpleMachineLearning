@@ -1,5 +1,5 @@
 
-#include "sml\Common\SmlSequenceSelection.h"
+#include "sml/Common/SmlSequenceSelection.h"
 
 #include <iostream>
 #include <ctime>

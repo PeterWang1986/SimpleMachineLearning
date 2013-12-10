@@ -1,7 +1,7 @@
 #ifndef	_SML_EXT_PARALLEL_H
 #define _SML_EXT_PARALLEL_H
 
-#include "tbb\atomic.h"
+#include "tbb/atomic.h"
 
 namespace SML {
 

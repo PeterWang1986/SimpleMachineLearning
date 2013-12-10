@@ -1,10 +1,10 @@
 
-#include "sml\Common\SmlCommonFunctions.h"
-#include "sml\Regression\BasisFunctions.h"
-#include "sml\Regression\LinearRegressionModel.h"
+#include "sml/Common/SmlCommonFunctions.h"
+#include "sml/Regression/BasisFunctions.h"
+#include "sml/Regression/LinearRegressionModel.h"
 
-#include "tbb\task_group.h"
-#include "tbb\task_scheduler_init.h"
+#include "tbb/task_group.h"
+#include "tbb/task_scheduler_init.h"
 
 #include <numeric>
 

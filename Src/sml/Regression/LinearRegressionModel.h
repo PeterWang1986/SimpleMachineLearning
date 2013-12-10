@@ -5,7 +5,7 @@
 #include <vector>
 #include <cassert>
 
-#include "sml\Common\SmlExtParallel.h"
+#include "sml/Common/SmlExtParallel.h"
 
 namespace SML {
 

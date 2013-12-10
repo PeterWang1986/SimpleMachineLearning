@@ -1,9 +1,9 @@
 
-#include "sml\Regression\LinearRegressionBuilder.h"
-#include "sml\Regression\BasisFunctions.h"
+#include "sml/Regression/LinearRegressionBuilder.h"
+#include "sml/Regression/BasisFunctions.h"
 
-#include "eigen\Core"
-#include "eigen\SVD"
+#include "eigen/Core"
+#include "eigen/SVD"
 
 #include <numeric>
 

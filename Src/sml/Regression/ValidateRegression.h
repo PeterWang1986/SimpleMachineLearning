@@ -1,7 +1,7 @@
 #ifndef	_VALIDATE_REGRESSION_H
 #define _VALIDATE_REGRESSION_H
 
-#include "sml\Common\SmlMacro.h"
+#include "sml/Common/SmlMacro.h"
 
 #include <numeric>
 

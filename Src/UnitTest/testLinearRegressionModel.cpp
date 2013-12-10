@@ -1,7 +1,7 @@
 
-#include "gtest\gtest.h"
-#include "sml\Regression\BasisFunctions.h"
-#include "sml\Regression\LinearRegressionModel.h"
+#include "gtest/gtest.h"
+#include "sml/Regression/BasisFunctions.h"
+#include "sml/Regression/LinearRegressionModel.h"
 
 namespace SML {
 

@@ -1,8 +1,8 @@
 
-#include "gtest\gtest.h"
-#include "sml\Regression\LinearRegressionBuilder.h"
-#include "sml\Regression\ValidateRegression.h"
-#include "sml\Common\SmlSequenceSelection.h"
+#include "gtest/gtest.h"
+#include "sml/Regression/LinearRegressionBuilder.h"
+#include "sml/Regression/ValidateRegression.h"
+#include "sml/Common/SmlSequenceSelection.h"
 
 #include <vector>
 
@@ -88,6 +88,8 @@ namespace SML {
 		lrBuilder.addSingleVarGussian(0, 0, 1);
 		lrBuilder.addSingleVarGussian(0, 1, 2);
 		lrBuilder.addSingleVarGussian(0, 8, 4);
+		lrBuilder.addSingleVarGussian(0, 2, 4);
+		lrBuilder.addSingleVarGussian(0, 4, 8);
 
 		lrBuilder.training(20, 1, x_value, y_value, 0.0);
 

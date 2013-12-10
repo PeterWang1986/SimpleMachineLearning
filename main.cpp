@@ -1,5 +1,5 @@
 
-#include "gtest\gtest.h"
+#include "gtest/gtest.h"
 #include <iostream>
 
 using std::cout;

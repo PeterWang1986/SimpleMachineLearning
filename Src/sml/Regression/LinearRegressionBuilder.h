@@ -1,8 +1,8 @@
 #ifndef _LINEAR_REGRESSION_BUILDER_H
 #define _LINEAR_REGRESSION_BUILDER_H
 
-#include "sml\Regression\LinearRegressionModel.h"
-#include "sml\Common\SmlMacro.h"
+#include "sml/Regression/LinearRegressionModel.h"
+#include "sml/Common/SmlMacro.h"
 
 namespace SML {
 

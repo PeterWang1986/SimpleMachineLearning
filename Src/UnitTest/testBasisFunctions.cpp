@@ -1,6 +1,6 @@
 
-#include "gtest\gtest.h"
-#include "sml\Regression\BasisFunctions.h"
+#include "gtest/gtest.h"
+#include "sml/Regression/BasisFunctions.h"
 
 TEST(GussianBasisFunction, phi)
 {
