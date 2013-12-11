@@ -1,6 +1,8 @@
 
 #include "gtest/gtest.h"
+
 #include "sml/Regression/LinearRegressionBuilder.h"
+#include "sml/Regression/BayesianLinearRegressionBuilder.h"
 #include "sml/Regression/ValidateRegression.h"
 #include "sml/Common/SmlSequenceSelection.h"
 
@@ -186,6 +188,67 @@ namespace SML {
 		const double rSquare = v.validate(y_value, y_value+20, vecPredValues.begin());
 		cout << "R-square=\t" << rSquare << endl;
 		//EXPECT_NEAR(0.909608, rSquare, 0.00001);
+	}
+
+	TEST(BayesianLrRegressionBuilder, training01)
+	{
+		LinearRegressionBuilder lrBuilder;
+		lrBuilder.addBiasFunction();
+		lrBuilder.addSingleVarGussian(0, 0, 1);
+		lrBuilder.addSingleVarGussian(0, 1, 0.5);
+		lrBuilder.addSingleVarGussian(0, 2, 4);
+		lrBuilder.addSingleVarGussian(0, 3, 1.5);
+		lrBuilder.addSingleVarGussian(0, 4, 8);
+		lrBuilder.addSingleVarGussian(0, 5, 2.5);
+		lrBuilder.addSingleVarGussian(0, 6, 8);
+		lrBuilder.addSingleVarGussian(0, 7, 3.5);
+		lrBuilder.addSingleVarGussian(0, 8, 4);
+
+		BayesianLrRegressionBuilder bayesLrBuilder(1, 20);
+		bayesLrBuilder.addBiasFunction();
+		bayesLrBuilder.addSingleVarGussian(0, 0, 1);
+		bayesLrBuilder.addSingleVarGussian(0, 1, 0.5);
+		bayesLrBuilder.addSingleVarGussian(0, 2, 4);
+		bayesLrBuilder.addSingleVarGussian(0, 3, 1.5);
+		bayesLrBuilder.addSingleVarGussian(0, 4, 8);
+		bayesLrBuilder.addSingleVarGussian(0, 5, 2.5);
+		bayesLrBuilder.addSingleVarGussian(0, 6, 8);
+		bayesLrBuilder.addSingleVarGussian(0, 7, 3.5);
+		bayesLrBuilder.addSingleVarGussian(0, 8, 4);
+
+		double target[20];
+		for (size_t i=0; i!=20; ++i) {
+			target[i] = y_value[i] + error[i];
+		}
+		lrBuilder.training(20, 1, x_value, target, 0.0);
+		bayesLrBuilder.training(20, 1, x_value, target);
+
+		vector<double> lrPred(20, 0), bayesLrPred(20, 0);
+		const LinearRegressionModel& lrModel = lrBuilder.getLinearRegressionModel();
+		const BayesianLrRegressionModel& bayesLrModel = bayesLrBuilder.getBayesianLinearRegressionModel();
+		for (size_t i=0; i!=20; ++i) {
+			lrPred[i] = lrModel.forecast(x_value+i, 1);
+			bayesLrPred[i] = bayesLrModel.forecast(x_value+i, 1);
+		}
+		
+		RsquaredValidate v;
+		const double lrTrainingRSquare = v.validate(target, target+20, lrPred.begin());
+		const double bayesLrTrainingRSquare = v.validate(target, target+20, bayesLrPred.begin());
+		cout << "lrTrainingRSquare=\t" << lrTrainingRSquare << endl;
+		cout << "bayesLrTrainingRSquare=\t" << bayesLrTrainingRSquare << endl;
+
+		vector<double> vecTarget(20, 0);
+		double x = 0.25;
+		for (size_t i=0; i!=20; ++i) {
+			lrPred[i] = lrModel.forecast(&x, 1);
+			bayesLrPred[i] = bayesLrModel.forecast(&x, 1);
+			vecTarget[i] = std::sin(x);
+			x += 0.5;
+		}
+		const double lrTestRSquare = v.validate(vecTarget.begin(), vecTarget.end(), lrPred.begin());
+		const double bayesLrTestRSquare = v.validate(vecTarget.begin(), vecTarget.end(), bayesLrPred.begin());
+		cout << "lrTestRSquare=\t" << lrTestRSquare << endl;
+		cout << "bayesLrTestRSquare=\t" << bayesLrTestRSquare << endl;
 	}
 
 

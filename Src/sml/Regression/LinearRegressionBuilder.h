@@ -6,8 +6,6 @@
 
 namespace SML {
 
-	class BasisFunctionBase;
-
 	class LinearRegressionBuilder
 	{
 	public:

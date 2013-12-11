@@ -26,7 +26,7 @@ namespace SML {
 		bool setBasisFunction(size_t pos, BasisFunctionBase* func);
 		bool setWeights(size_t pos, double weight);
 		void calcDesignMatrix(size_t rows, size_t cols,
-							size_t dimesion, const double* data, double* matrix);
+							size_t dimension, const double* data, double* matrix);
 		double forecast(const double* data, size_t dimension) const;
 
 		inline size_t getNumBasisFunctions() const { return m_BasisFunctions.size(); }
