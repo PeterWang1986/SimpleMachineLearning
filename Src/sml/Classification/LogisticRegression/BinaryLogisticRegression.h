@@ -22,6 +22,12 @@ namespace SML {
 										unsigned int maxIteration);
 		void squence_training(unsigned int dimension, const double* data,
 							int label, double learningRate);
+		bool vlSGD(unsigned int rows, unsigned int cols,
+				const double* data, const int* label,
+				unsigned int maxIteration);
+		bool vgSGD(unsigned int rows, unsigned int cols,
+				const double* data, const int* label,
+				unsigned int maxIteration);
 
 		const std::vector<double>& getWeights() const { return m_Weights; }
 
